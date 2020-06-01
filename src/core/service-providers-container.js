@@ -1,5 +1,5 @@
 import router from './router';
-import providers from '../config/providers';
+import providers from 'config/providers';
 
 
 export default class ServiceProviderContainer {
@@ -8,7 +8,7 @@ export default class ServiceProviderContainer {
     /**
      * Initialize and collect our service providers list from config file
      */
-    poot(){
+    boot(){
         for (let i = 0 ; i < providers.length; i ++){
             let providerObject = new providers[i];
 
@@ -21,11 +21,8 @@ export default class ServiceProviderContainer {
     registerRoutes(){
         
         for(let provider of this.serviceProviders){
-            if(! provider.routes) continue;
             
-            for(let route of provider.routes){
-                route(router);
-            }
+            provider.mapRouting();
         }
     }
 

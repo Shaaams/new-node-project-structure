@@ -2,7 +2,7 @@ import env from './env'
 import express from 'express';
 import router from './router';
 import bodyParser from  'body-parser';
-import ServiceProviderContainer from './service-providers-container';
+import ServiceProviderContainer from 'core/service-providers-container';
 
 export default class Application{
     
@@ -21,7 +21,7 @@ export default class Application{
      */
     initializeProviders(){
         this.serviceProviders = new ServiceProviderContainer();
-        this.serviceProviders.poot();
+        this.serviceProviders.boot();
     }
     /**
      * Prepare the express Server

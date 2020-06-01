@@ -8,7 +8,11 @@ class Router{
     setExpressApp(expressApp){
         this.expressApp = expressApp;
     }
-
+    /**
+     * Get 'Route' && action 
+     * @param {String} route 
+     * @param {Array} action 
+     */
     get(route, action=[controller, method]){
         this.expressApp.get(route, (req, res) =>{
             let controllerObject = new action[0];

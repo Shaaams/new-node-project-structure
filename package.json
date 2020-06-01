@@ -6,7 +6,13 @@
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
     "build": "babel src --out-dir dist",
-    "serve": "babel-watch src/index.js"
+    "serve": "babel-watch src/index.js",
+    "pathaliase": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "core": "src/core",
+    "modules": "src/modules",
+    "config": "src/config"
   },
   "keywords": [],
   "author": "Shamss",
@@ -17,7 +23,8 @@
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "babel-upgrade": "^1.0.1",
-    "babel-watch": "^7.0.0"
+    "babel-watch": "^7.0.0",
+    "link-module-alias": "^1.2.0"
   },
   "dependencies": {
     "@flk/fs": "^1.3.0",

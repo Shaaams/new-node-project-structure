@@ -1,12 +1,10 @@
  import siteRouters from './routes/site'
- export default class ServiceProvider{
-
+ import ServiceProvider from 'core/service-provider';
+export default class HomeServiceProvider extends ServiceProvider{
+    /**
+     * {@inheritdoc}
+     */
     routes=[siteRouters];
-     constructor(){
-         
-         
-         
-     }
  }
 
   /**
