@@ -1,4 +1,15 @@
- /**
+ import siteRouters from './routes/site'
+ export default class ServiceProvider{
+
+    routes=[siteRouters];
+     constructor(){
+         
+         
+         
+     }
+ }
+
+  /**
  * nots: Service Providers 
  * Service Providers are a mechanism of doing certain jops encapsulated 
  * under one controller|provider, that will manage these jops/action
@@ -12,11 +23,3 @@
  * We'll create a config file that holds all of our service providers
  * So whenever we need to add/remove any module we'll just add/remove the service provider
  */
-
- export default class ServiceProvider{
-     constructor(){
-         
-         
-         
-     }
- }

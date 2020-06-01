@@ -1,4 +1,6 @@
+import router from './router';
 import providers from '../config/providers';
+
 
 export default class ServiceProviderContainer {
   
@@ -12,6 +14,20 @@ export default class ServiceProviderContainer {
 
            this.serviceProviders.push(providerObject)
         }
-        
     }
+    /**
+     * Get all routes frome every single provider
+     */
+    registerRoutes(){
+        
+        for(let provider of this.serviceProviders){
+            if(! provider.routes) continue;
+            
+            for(let route of provider.routes){
+                route(router);
+            }
+        }
+    }
+
+
 }

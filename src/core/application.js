@@ -1,14 +1,20 @@
 import env from './env'
 import express from 'express';
+import router from './router';
 import bodyParser from  'body-parser';
 import ServiceProviderContainer from './service-providers-container';
 
 export default class Application{
     
-
+     
     constructor(){
+        
         this.prepareServer();
         this.initializeProviders()
+        /**
+         * Pass the object express to router
+         */
+        router.setExpressApp(this.express);
     }
     /**
      * Initialize our service providers container
@@ -38,9 +44,7 @@ export default class Application{
          */
      run(port){
 
-        this.express.get('/', (req, res) => {
-            res.send('Welcome [ TmTam 7abibty ] ')
-        })
+        this.serviceProviders.registerRoutes();
         
         this.express.listen(port,()=>{
             console.log(`Server is listen Port : ${port}`);
@@ -51,8 +55,7 @@ export default class Application{
      /**
       * Testing
       * printEnv(){
-         console.log(env('mode'));
-         
-     }
+      *   console.log(env('mode')); 
+      *   }
       */
 }
