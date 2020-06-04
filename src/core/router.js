@@ -1,26 +1,115 @@
 class Router{
 
-    /**
-     * Set the express application
-     * this method is called from the application class
-     * @param {Express} expressApp 
-     */
-    setExpressApp(expressApp){
-        this.expressApp = expressApp;
-    }
-    /**
-     * Get 'Route' && action 
-     * @param {String} route 
-     * @param {Array} action 
-     */
-    get(route, action=[controller, method]){
-        this.expressApp.get(route, (req, res) =>{
-            let controllerObject = new action[0];
-            let outPut = controllerObject[action[1]](req, res);
-            res.send(outPut);
-        })
-        
-    }
+            /**
+             * Set the express application
+             * this method is called from the application class
+             * @param {Express} expressApp 
+             */
+            setExpressApp(expressApp){
+                this.expressApp = expressApp;
+
+            }
+
+            
+            /**
+             * 
+             * @param {String} singelRequestMethod 
+             * @param {String} route 
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+            _handleRequest(singelRequestMethod,route, [controller, controllerMethod]) {
+                //console.log(singelRequestMethod);
+                    //object of Express App
+                this.expressApp[singelRequestMethod](route,  (req, res) =>{
+                    //Create new controller object
+                    let controllerObject = new controller,
+                        //Get the method from controller
+                        methodFunction = controllerObject[controllerMethod];
+                        // Call the method from the current route
+                    let outPut = methodFunction(req, res);
+                        // Send response if the output isn't empty
+                    if(outPut){
+                        res.send(outPut);
+                    }  
+                    
+                });
+                return this;
+            }
+
+            /**
+             * Add get Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            get(route, action){
+                return this._handleRequest('get', route, action);
+            }
+
+            /**
+             * Add post Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            post(route, action){
+                return this._handleRequest('post', route, action);
+            }
+
+            /**
+             * Add put Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            put(route, action){
+                return this._handleRequest('put', route, action);
+            }
+
+            /**
+             * Add patch Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            patch(route, action){
+                return this._handleRequest('patch', route, action);
+            }
+
+            /**
+             * Add delete Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            delete(route, action){
+                return this._handleRequest('delete', route, action);
+            }
+
+            /**
+             *  Add options Request
+             * 
+             * @param {String} route
+             * @param {array} action => [controller, controllerMethod]
+             * @returns {Router}
+             */
+
+            options(route, action){
+                return this._handleRequest('options', route, action);
+            }
+
+
 }
 
 export default new Router;

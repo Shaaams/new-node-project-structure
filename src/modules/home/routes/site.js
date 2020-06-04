@@ -3,8 +3,8 @@ import router from 'core/router';
 
 // router.get('/', [HomeController, 'homePage'])
 
-export default function(router){
+export default function(){
     router.get('/', [HomeController, 'homePage'])
-   // router.get('/', [HomeController, 'homePage']);
+          .post('/submit', [HomeController, 'submitForm'])
     
 }

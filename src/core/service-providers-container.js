@@ -1,5 +1,5 @@
 import router from './router';
-import providers from 'config/providers';
+import providers from './../config/providers';
 
 
 export default class ServiceProviderContainer {
