@@ -105,6 +105,29 @@ class Router{
                 return this._handleRequest('options', route, action);
             }
 
+            /**
+             * Add new restful API recourse
+             * This will create the following routes
+             * Get /recourse         >> List all recourses
+             * Get /recourse/:id     >> Get one record
+             * POST /recourse        >> Create new record
+             * PUT /recourse/:id     >> Update Existing record
+             * DELETE /recourse/:id  >> Delete record
+             * 
+             * @param   {String} recourse
+             * @param   {handler} recourseHandler
+             * @returns {Router} 
+             */
+            recourse(recourse, recourseHandler){
+                const {list, show, create, update, remove} = recourseHandler;
+
+                return this._handleRequest('get', recourse, list)
+                           ._handleRequest('get', recourse + '/:id', show)
+                           ._handleRequest('post', recourse, create)
+                           ._handleRequest('put', recourse + '/id', update)
+                           ._handleRequest('delete', recourse + '/id', remove);
+            }         
+
 
 }
 
