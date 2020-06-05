@@ -1,12 +1,25 @@
 import env from './env'
 import express from 'express';
 import router from './router';
-import fileUpload from 'express-fileupload';
 import bodyParser from  'body-parser';
+import fileUpload from 'express-fileupload';
 import ServiceProviderContainer from 'core/service-providers-container';
 
-export default class Application{
+class Application{
     
+    /**
+     * Application request
+     * @var ExpressRequest
+     */
+
+     request = null;
+
+     /**
+     * Application request
+     * @var ExpressResponse
+     */
+
+     response = null;
      
     constructor(){
         
@@ -29,6 +42,14 @@ export default class Application{
      */
     prepareServer(){
         this.express = express();
+
+        //Add Custome Middleware
+
+        this.express.use((req, res, next) => {
+            this.request  = req;
+            this.response = res;
+            next();
+        })
 
         this.express.use(bodyParser.urlencoded({
             extended: true,
@@ -65,3 +86,14 @@ export default class Application{
       *   }
       */
 }
+
+let app = new Application;
+
+export function request (){
+    return app.request;
+}
+
+export function response(){
+    return app.response;
+}
+     export default app;

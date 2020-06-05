@@ -18,14 +18,14 @@ class Router{
              * @param {array} action => [controller, controllerMethod]
              * @returns {Router}
              */
-            _handleRequest(singelRequestMethod,route, [controller, controllerMethod]) {
-                //console.log(singelRequestMethod);
+            _handleRequest(singleRequestMethod,route, [controller, controllerMethod]) {
+                //console.log(singleRequestMethod);
                     //object of Express App
-                this.expressApp[singelRequestMethod](route,  (req, res) =>{
+                this.expressApp[singleRequestMethod](route,  (req, res) =>{
                     //Create new controller object
                     let controllerObject = new controller,
                         //Get the method from controller
-                        methodFunction = controllerObject[controllerMethod];
+                        methodFunction = controllerObject[controllerMethod].bind(controllerObject);
                         // Call the method from the current route
                     let outPut = methodFunction(req, res);
                         // Send response if the output isn't empty
