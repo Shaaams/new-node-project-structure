@@ -1,18 +1,18 @@
 import {request as requestHandler} from 'core/application';
 import Input from 'core/input';
-import { request } from './application';
+
 import { Is } from '@flk/supportive-is';
 class Validator{
     /**
      * Rules List
-     * @var {object}
+     * @var {Object}
      */
 
     rulesList = {};
 
     /**
      * Errors List
-     * @var {object}
+     * @var {Object}
      */
     errors = {};
 
@@ -33,7 +33,7 @@ class Validator{
 
     /**
      * 
-     * @param {object} rules
+     * @param {Object} rules
      * @returns {Validator} 
      */
     rules(rules){

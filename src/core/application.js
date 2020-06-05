@@ -9,18 +9,23 @@ class Application{
     
     /**
      * Application request
+     * 
      * @var ExpressRequest
      */
 
      request = null;
 
      /**
-     * Application request
+     * Application response
+     * 
      * @var ExpressResponse
      */
 
      response = null;
      
+     /**
+      * constructor
+      */
     constructor(){
         
         this.prepareServer();
@@ -43,7 +48,7 @@ class Application{
     prepareServer(){
         this.express = express();
 
-        //Add Custome Middleware
+        //Add Custom Middleware
 
         this.express.use((req, res, next) => {
             this.request  = req;
@@ -51,10 +56,12 @@ class Application{
             next();
         })
 
+        // queryString
         this.express.use(bodyParser.urlencoded({
             extended: true,
         }));
 
+        // parsing POST requests data as form data and allow uploading files
         this.express.use(fileUpload({
             useTempFiles: true,
             tempFileDir: __dirname + '/tmp',
